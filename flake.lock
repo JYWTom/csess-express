@@ -1,0 +1,82 @@
+{
+  "nodes": {
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1722752898,
+        "narHash": "sha256-8BwcY0yYlUxpoqpAoeXKxVG+w97LUBp+pfzUiISOmeY=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "0caa626457f1f4f8273a89775bf9081b7fc09823",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1719082008,
+        "narHash": "sha256-jHJSUH619zBQ6WdC21fFAlDxHErKVDJ5fpN0Hgx4sjs=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9693852a2070b398ee123a329e68f0dab5526681",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "fenix": "fenix",
+        "nixpkgs": "nixpkgs",
+        "systems": "systems"
+      }
+    },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722589793,
+        "narHash": "sha256-OYDIo1Iqb6ldcC6JdqzKAKSRiXjDOwOAJKKMH8OZutk=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "aa00ddcf654a35ba0eafe17247cf189958d33182",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1720271492,
+        "narHash": "sha256-cENmgXqL46qhgPEq5jQ4PTTKWqR2ELXitvMRcogHyv0=",
+        "owner": "usertam",
+        "repo": "nix-systems",
+        "rev": "d0c54b2cf021cba6d77249d0e425df63486a2573",
+        "type": "github"
+      },
+      "original": {
+        "owner": "usertam",
+        "repo": "nix-systems",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

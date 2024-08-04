@@ -1,0 +1,49 @@
+From: The Computer Science and Engineering Students' Society <su_csess@connect.ust.hk>
+To: CSESS Members <csess-member@lists.ust.hk>, CSESS Honorary Members <csess-honmem@lists.ust.hk>
+Subject: [CSESS] 自煮燃髮嘅 EML Editor。
+
+======
+
+(This message is disseminated on behalf of CSESS.)
+
+======
+
+各位 CSESS 會員：
+
+呢個係用 Rust 同 WebAssembly 自煮燃髮整出嚟嘅 EML Editor，可以自動化排版比較簡單嘅文、圖元素。唔使寫嘢成日對住堆 HTML，同時最後 Check Email 應該都會簡單啲。
+
+喺左邊寫嘅嘢右邊會即刻 Render 出嚟。右上係預覽，右下係最後出嚟個 EML 檔，有埋完整嘅 Email Header。要 Send 嘅話，下載個 EML 檔，用 Thunderbird 開完後再編輯為新訊息。
+
+原始檔要有「From」、「To」同「Subject」呢啲標題，然後用「\n======\n」隔開。個 Disclaimer「This message is disseminated...」係可有可無嘅，如有要同樣用「\n======\n」隔開。
+
+淨低啲字會跟每個「\n\n」每段分開。獨立嘅「------」會變成 &lt;br&gt;&lt;hr&gt;&lt;br&gt;，Markdown 連結例如 [text]​(link) 會變成 &lt;a href="link"&gt;text&lt;/a&gt;。HTML 標籤例如 &lt;img&gt; 同埋 &lt;table&gt; 唔會重寫會直出。
+
+版權所有 © 2024 Samuel Tam。
+
+如有任何查詢，歡迎電郵我哋 [su_csess@connect.ust.hk](mailto:su_csess@connect.ust.hk)。
+
+順頌　過三爆四
+二零二四至二零二五年度
+香港科技大學學生會
+計算機科學及工程學系學生會
+
+------
+
+Dear CSESS Members,
+
+This is an interactive EML editor, made with Rust and WebAssembly. This editor is written to automate the typesetting and formatting of the email with simple text and media content. It also makes proofreading much easier compared to reading the entire HTML.
+
+What you write on the left edit panel will be immediately rendered on the preview panels. The right upper panel is the preview rendered, and the lower panel is the preview of the compiled EML file, with full headers included. To send, just get the .eml file, open with Thunderbird and edit as new message.
+
+Headers like “from”, “to” and “subject” must be supplied, followed by “\n======\n”. The disclaimer e.g. “This message is disseminated...” is optional, enabled if another “\n======\n” exists.
+
+Rest of the text is split into chunks with each “\n\n”. A standalone “------” will turn into “&lt;br&gt;&lt;hr&gt;&lt;br&gt;”, and markdown links in the format of “[text]​(link)” will turn into “&lt;a href="link"&gt;text&lt;/a&gt;”. HTML tags like &lt;img&gt; and &lt;table&gt; will not be escaped and will be rendered as-is.
+
+Copyright (c) 2024 Samuel Tam. All rights reserved.
+
+If you have any inquiries, please feel free to email us at [su_csess@connect.ust.hk](mailto:su_csess@connect.ust.hk).
+
+Best wishes,
+The Computer Science and Engineering Students’ Society,
+Hong Kong University of Science and Technology Students’ Union,
+Session 2024–2025
