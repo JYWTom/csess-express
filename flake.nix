@@ -11,19 +11,41 @@
       fenix.packages.${system}
     );
   in {
-    devShells = forAllPkgs (pkgs: fenix: {
-      default = pkgs.mkShell {
-        name = "email-gen-dev";
-        packages = [
+    packages = forAllPkgs (pkgs: fenix: {
+      default = pkgs.rustPlatform.buildRustPackage {
+        pname = "email-gen";
+        version = "0.1.0";
+        src = self;
+        cargoLock.lockFile = ./Cargo.lock;
+        nativeBuildInputs = [
+          # need patch on darwin: https://github.com/NixOS/nix/issues/9625
+          # extra-sandbox-paths = [ "/private/etc/ssl/openssl.cnf" ]
           (fenix.combine [
             fenix.stable.toolchain
             fenix.targets.wasm32-unknown-unknown.stable.rust-std
           ])
+          pkgs.binaryen
+          pkgs.lld
+          pkgs.wasm-bindgen-cli
           pkgs.wasm-pack
-          pkgs.pkg-config
-          pkgs.libiconv
         ];
-        CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER = "lld";
+        doCheck = false;
+        RUSTFLAGS = "-C linker=lld";
+        HOME = "$TMPDIR/source";
+        buildPhase = ''
+          wasm-pack build --target web --no-typescript --no-pack
+        '';
+        installPhase = ''
+          mkdir -p $out
+          cp -r pkg/ docs/ index.html $out
+        '';
+      };
+    });
+
+    devShells = forAllPkgs (pkgs: fenix: {
+      default = pkgs.mkShell {
+        name = "email-gen-dev";
+        packages = self.packages.${pkgs.system}.default.nativeBuildInputs;
       };
     });
   };
