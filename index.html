@@ -83,16 +83,26 @@
         import init, { make_html, make_div } from './pkg/email_gen.js';
   
         async function page_init() {
-            await init();
             let input = document.getElementById('input');
+            input.addEventListener('input', render);
+
+            let reset = document.getElementById('reset');
+            reset.addEventListener('click', async () => {
+                let input = document.getElementById('input');
+                const raw = await fetch('docs/default.txt').then(response => response.text());
+                input.value = raw;
+                render();
+            });
+
             const cached = localStorage.getItem('input');
-            if (cached) {
+            if (cached && cached.trim()) {
                 input.value = cached;
             } else {
-                const raw = await fetch('template.txt').then(response => response.text());
+                const raw = await fetch('docs/manual.txt').then(response => response.text());
                 input.value = raw;
             }
-            input.addEventListener('input', render);
+
+            await init();
             render();
         }
 
@@ -102,22 +112,15 @@
             let div = make_div(raw);
             let html = make_html(raw);
 
-            let rendered = document.getElementById("rendered");
+            let rendered = document.getElementById('rendered');
             rendered.innerHTML = div;
-            let compiled = document.getElementById("compiled");
+            let compiled = document.getElementById('compiled');
             compiled.innerText = html;
-            let download = document.getElementById("download");
-            download.href = "data:text/plain;charset=utf-8," + encodeURIComponent(html);
+            let download = document.getElementById('download');
+            download.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(html);
 
-            if (div) {
-                localStorage.setItem('input', raw);
-            }
+            localStorage.setItem('input', raw);
         }
-
-        document.getElementById('reset').addEventListener('click', () => {
-            localStorage.removeItem('input');
-            location.reload();
-        });
 
         page_init();
     </script>

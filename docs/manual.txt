@@ -1,0 +1,35 @@
+From: Samuel Tam <hytamap@connect.ust.hk>
+To: The Computer Science and Engineering Students' Society <su_csess@connect.ust.hk>
+Subject: [CSESS] EML Editor Manual
+
+======
+
+(This manual is disseminated on behalf of Samuel Tam.)
+
+======
+
+呢個係用 Rust 同 WebAssembly 自煮燃髮出嚟嘅 EML Editor，可以自動化排版比較簡單嘅文、圖元素。唔使寫嘢成日對住堆 HTML，最後 Check Email 應該都會簡單啲。
+
+喺左邊 Editor 寫嘅嘢，右邊會即刻 Render 出嚟。右上係預覽，右下係最後出嚟個 EML 檔，有埋完整嘅 Email Header。要 Send 嘅話，下載個 EML 檔，用 Thunderbird 開完後再編輯為新訊息。
+
+原始檔要有「From」、「To」同「Subject」呢啲 Headers，然後用「\n======\n」隔開。個「This message is disseminated...」Disclaimer 係可有可無嘅，如有要同樣用「\n======\n」隔開。
+
+淨低啲字會跟每個「\n\n」每段分開。獨立嘅「------」會變成 &lt;br&gt;&lt;hr&gt;&lt;br&gt;，之後 Markdown 連結如 [text]​(link) 會變成 &lt;a href="link"&gt;text&lt;/a&gt;。HTML 標籤如 &lt;img&gt; 同埋 &lt;table&gt; 唔會被重寫會直出。
+
+撳左邊 Editor 右上角個 ↪️ Reset 掣，開始你嘅 In Sec 生涯。
+
+版權所有 © 2024 Samuel Tam。
+
+------
+
+This is an interactive EML editor, made with Rust and WebAssembly. This editor is written to automate the typesetting and formatting of the email with simple text and media content. It also makes proofreading much easier compared to reading the entire HTML.
+
+What you write on the left edit panel will be immediately rendered on the preview panels. The right upper panel is the preview rendered, and the lower panel is the preview of the compiled EML file, with full headers included. To send, just get the .eml file, open with Thunderbird and edit as new message.
+
+Headers like “from”, “to” and “subject” must be supplied, followed by “\n======\n”. The disclaimer e.g. “This message is disseminated...” is optional, enabled if another “\n======\n” exists.
+
+Rest of the text is split into chunks with each “\n\n”. A standalone “------” will turn into “&lt;br&gt;&lt;hr&gt;&lt;br&gt;”, and markdown links in the format of “[text]​(link)” will turn into “&lt;a href="link"&gt;text&lt;/a&gt;”. HTML tags like &lt;img&gt; and &lt;table&gt; will not be escaped and will be rendered as-is.
+
+Start your life as an Internal Secretary, by pressing the ↪️ Reset button.
+
+Copyright (c) 2024 Samuel Tam. All rights reserved.
