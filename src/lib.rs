@@ -60,7 +60,7 @@ fn inline(extra: Option<&str>) -> String {
     let default = "margin: 0; padding: 0; width: 100% !important; border-collapse: collapse !important;";
     match extra {
         Some(extra) => format!("{} {}", default, extra),
-        None => format!("{}", default),
+        None => default.into(),
     }
 }
 
@@ -130,7 +130,7 @@ pub fn make_html(raw: &str) -> String {
     // Check if the email headers exist
     let headers_pattern = Regex::new(r"^(.*: .*\n)+\n======\n\n").unwrap();
     if !headers_pattern.is_match(&raw) {
-        return format!("{}", "! invalid headers");
+        return "! invalid headers".into();
     }
 
     // Check if the disclaimer exists
@@ -148,7 +148,7 @@ pub fn make_html(raw: &str) -> String {
     let headers = format!("{}\n{}\n{}\n{}\n\n", headers.trim(), date, content_type, mime_version);
 
     format!("{}", html! {
-        : Raw(format!("{}", headers));
+        : Raw(headers.to_owned());
         : doctype::HTML;
         html {
             head {
@@ -169,7 +169,7 @@ pub fn make_div(raw: &str) -> String {
     // Check if the email headers exist
     let headers_pattern = Regex::new(r"^(.*: .*\n)+\n======\n\n").unwrap();
     if !headers_pattern.is_match(&raw) {
-        return format!("");
+        return "".into();
     }
 
     // Check if the disclaimer exists
@@ -177,7 +177,7 @@ pub fn make_div(raw: &str) -> String {
     let disclaimer_exist = disclaimer_pattern.is_match(&raw);
 
     let mut split = raw.splitn(if disclaimer_exist { 3 } else { 2 }, "\n======\n");
-    let _headers = split.next().unwrap();   // ignore headers
+    let _headers = split.next();    // ignore headers
     let disclaimer = if disclaimer_exist { split.next() } else { None };
     let body = split.next().unwrap();
 

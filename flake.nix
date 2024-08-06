@@ -13,8 +13,8 @@
   in {
     packages = forAllPkgs (pkgs: fenix: {
       default = pkgs.rustPlatform.buildRustPackage {
-        pname = "email-gen";
-        version = "0.1.0";
+        pname = "csess-express";
+        version = "1.0.0";
         src = self;
         cargoLock.lockFile = ./Cargo.lock;
         nativeBuildInputs = [
@@ -37,7 +37,7 @@
         '';
         installPhase = ''
           mkdir -p $out
-          cp -r pkg/ docs/ index.html $out
+          cp -r pkg/ index.html $out
         '';
       };
     });

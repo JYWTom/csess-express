@@ -80,7 +80,7 @@
 </head>
 <body>
     <script type="module">
-        import init, { make_html, make_div } from './pkg/email_gen.js';
+        import init, { make_html, make_div } from './pkg/csess_express.js';
   
         async function page_init() {
             let input = document.getElementById('input');
@@ -89,7 +89,7 @@
             let reset = document.getElementById('reset');
             reset.addEventListener('click', async () => {
                 let input = document.getElementById('input');
-                const raw = await fetch('docs/default.txt').then(response => response.text());
+                const raw = await fetch('pkg/02-default.txt').then(response => response.text());
                 input.value = raw;
                 render();
             });
@@ -98,7 +98,7 @@
             if (cached && cached.trim()) {
                 input.value = cached;
             } else {
-                const raw = await fetch('docs/manual.txt').then(response => response.text());
+                const raw = await fetch('pkg/01-manual.txt').then(response => response.text());
                 input.value = raw;
             }
 
