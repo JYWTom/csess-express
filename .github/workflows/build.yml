@@ -1,0 +1,41 @@
+name: "Build"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - master
+    tags:
+    - '*'
+permissions:
+  contents: write
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: DeterminateSystems/nix-installer-action@main
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - name: Build
+      run: |
+        nix build --print-build-logs
+        if ! nix build --rebuild --keep-failed; then
+          diff -ar $(nix eval --raw){,.check}
+          false
+        fi
+    - uses: actions/upload-artifact@main
+      with:
+        path: result/*
+    - name: Make distribution
+      if: startsWith(github.ref, 'refs/tags')
+      run: |
+        sudo apt-get install -y pixz
+        tar --sort=name \
+            --mtime='1970-01-01' \
+            --owner=0 --group=0 --numeric-owner \
+            -I pixz -cf "csess-express-$(basename ${{github.ref}}).tar.xz" \
+            -C result $(ls result)
+    - uses: softprops/action-gh-release@master
+      if: startsWith(github.ref, 'refs/tags')
+      with:
+        files: csess-express-*.tar.xz
